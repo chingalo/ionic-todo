@@ -70,6 +70,7 @@
   },
   "description": "An Ionic project",
   "config": {
+    "ionic_webpack": "./configs/webpack.config.js",
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }

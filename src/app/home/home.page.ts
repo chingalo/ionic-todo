@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConfigService } from '../services/app-config.service';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
-  constructor() {}
-  ngOnInit() {}
+  constructor(private appConfigService: AppConfigService) {}
+  ngOnInit() {
+    this.intiateApp();
+  }
+
+  async intiateApp() {
+    await this.appConfigService.setConnection();
+  }
 }

@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { createConnection } from 'typeorm';
-import { Platforms } from '@ionic/core';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppConfigService {
-  appConfig;
-  constructor(platform: Platforms) {
-    this.appConfig = platform;
-  }
+  constructor(private platform: Platform) {}
 
   async setConnection() {
-    const platform = this.appConfig;
-    if (platform.is('cordova')) {
+    if (this.platform.is('cordova')) {
       // Running on device or emulator
       alert('here');
       await createConnection({
@@ -26,6 +22,7 @@ export class AppConfigService {
       });
     } else {
       // Running app in browser
+      console.log('inside browser');
       await createConnection({
         type: 'sqljs',
         autoSave: true,

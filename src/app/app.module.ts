@@ -13,9 +13,9 @@ import { nativePlugins, appProviders } from './services';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ...nativePlugins,
-    appProviders,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ...appProviders
   ],
   bootstrap: [AppComponent]
 })
