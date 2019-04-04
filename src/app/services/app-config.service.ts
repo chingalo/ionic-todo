@@ -10,6 +10,7 @@ export class AppConfigService {
   constructor(private platform: Platform) {}
 
   async setConnection(dataBaseName: string) {
+    await this.platform.ready();
     if (this.platform.is('cordova')) {
       await createConnection({
         type: 'cordova',

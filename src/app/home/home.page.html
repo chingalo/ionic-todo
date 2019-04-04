@@ -1,12 +1,13 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Ionic Blank
+      Todo App
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <app-todo-form (saveTodoEvent)="onSaveTodo($event)"></app-todo-form>
+  <div *ngIf="todos && todos.length > 0">
+    <app-todo-list [todos]="todos"> </app-todo-list>
+  </div>
 </ion-content>

@@ -1,0 +1,6 @@
+<ion-virtual-scroll [items]="todos">
+  <ion-item *virtualItem="let todo">
+    {{ todo.id }} {{ todo.name }}<br>
+    {{ todo.description }}
+  </ion-item>
+</ion-virtual-scroll>

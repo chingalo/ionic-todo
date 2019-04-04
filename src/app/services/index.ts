@@ -27,7 +27,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppConfigService } from './app-config.service';
+import { TodoService } from './todo.service';
 
-export const appProviders = [AppConfigService];
+export const appProviders = [AppConfigService, TodoService];
 
 export const nativePlugins = [SQLite, SplashScreen, StatusBar];

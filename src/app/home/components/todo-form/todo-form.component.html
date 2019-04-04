@@ -1,0 +1,6 @@
+<div class="todo-form">
+  <ion-input [(ngModel)]="name" position="floating">Title</ion-input>
+  <ion-textarea [(ngModel)]="description" position="floating">Description</ion-textarea>
+  <ion-button color="primary" expand="full" [disabled]="name.trim() === '' || description.trim() === ''"
+    (click)="saveTodo()">Save todo</ion-button>
+</div>
