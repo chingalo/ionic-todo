@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createConnection } from 'typeorm';
 import { Platform } from '@ionic/angular';
+import { Todo } from 'src/models/todo';
 
 @Injectable({
   providedIn: 'root'
@@ -8,28 +9,15 @@ import { Platform } from '@ionic/angular';
 export class AppConfigService {
   constructor(private platform: Platform) {}
 
-  async setConnection() {
+  async setConnection(dataBaseName: string) {
     if (this.platform.is('cordova')) {
-      // Running on device or emulator
-      alert('here');
       await createConnection({
         type: 'cordova',
-        database: 'test',
+        database: `${dataBaseName}`,
         location: 'default',
         logging: ['error', 'query', 'schema'],
         synchronize: true,
-        entities: []
-      });
-    } else {
-      // Running app in browser
-      console.log('inside browser');
-      await createConnection({
-        type: 'sqljs',
-        autoSave: true,
-        location: 'browser',
-        logging: ['error', 'query', 'schema'],
-        synchronize: true,
-        entities: []
+        entities: [Todo]
       });
     }
   }

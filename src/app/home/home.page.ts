@@ -8,11 +8,13 @@ import { AppConfigService } from '../services/app-config.service';
 })
 export class HomePage implements OnInit {
   constructor(private appConfigService: AppConfigService) {}
-  ngOnInit() {
-    this.intiateApp();
-  }
+  ngOnInit() {}
 
   async intiateApp() {
-    await this.appConfigService.setConnection();
+    try {
+      await this.appConfigService.setConnection('dhis_touch');
+    } catch (error) {
+      console.log(JSON.stringify({ type: 'COnnection error : ', error }));
+    }
   }
 }
