@@ -31,10 +31,10 @@ export class HomePage implements OnInit {
     this.intiateApp('dhis_touch');
   }
 
-  async intiateApp(newDb: string, oldDataBase?: string) {
+  async intiateApp(dbName: string) {
     this.todos = [];
     try {
-      await this.appConfigService.setConnection(newDb, oldDataBase);
+      await this.appConfigService.setConnection(dbName);
       this.count++;
       setTimeout(() => {
         this.getUpdateTodos();
@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
   }
 
   changeDb() {
-    this.intiateApp(`dhis_touch_${this.count}`, 'dhis_touch');
+    this.intiateApp(`dhis_touch_${this.count}`);
   }
 
   onSaveTodo(data) {

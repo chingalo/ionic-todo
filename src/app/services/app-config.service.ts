@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { createConnection, getConnection, getConnectionManager } from 'typeorm';
 import { Platform } from '@ionic/angular';
 import { Todo } from 'src/models/todo';
+import { Task } from 'src/models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,8 @@ export class AppConfigService {
   connection: any;
   constructor(private platform: Platform) {}
 
-  async setConnection(dataBaseName: string, oldDataBase?: string) {
+  async setConnection(dataBaseName: string) {
     await this.platform.ready();
-    console.log(JSON.stringify({ dataBaseName, oldDataBase }));
     if (this.platform.is('cordova')) {
       try {
         if (this.connection) {
@@ -28,7 +28,7 @@ export class AppConfigService {
             location: 'default',
             logging: ['error', 'query', 'schema'],
             synchronize: true,
-            entities: [Todo]
+            entities: [Todo, Task]
           });
           this.connection = connection;
         }, 100);

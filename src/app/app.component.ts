@@ -15,7 +15,7 @@ export class AppComponent {
     statusBar: StatusBar
   ) {
     platform.ready().then(async () => {
-      statusBar.styleBlackTranslucent();
+      statusBar.styleLightContent();
       splashScreen.hide();
     });
   }

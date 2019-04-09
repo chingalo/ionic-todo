@@ -46,6 +46,22 @@ export class TodoFormComponent implements OnInit {
     }
   }
 
+  async delete() {
+    try {
+      await this.todoService.deleteTodoById(this.todo.id);
+      const toast = await this.toastController.create({
+        message: 'Deleted successfully',
+        duration: 2000,
+        position: 'top'
+      });
+      this.reinitializeTodo();
+      this.saveTodoEvent.emit({ status: true });
+      toast.present();
+    } catch (error) {
+      console.log(JSON.stringify({ type: 'Add todo error : ', error }));
+    }
+  }
+
   reinitializeTodo() {
     delete this.todo.id;
     this.todo.name = '';
