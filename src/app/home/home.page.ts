@@ -16,26 +16,37 @@ export class HomePage implements OnInit {
   isFormLoaded: boolean;
 
   todos: Array<Todo>;
+  count: number;
 
   constructor(
     private appConfigService: AppConfigService,
     private todoService: TodoService
   ) {
     this.isFormLoaded = true;
+    this.count = 0;
+    this.todos = [];
   }
   ngOnInit() {
     this.currentTodo = null;
-    this.todos = [];
-    this.intiateApp();
+    this.intiateApp('dhis_touch');
   }
 
-  async intiateApp() {
+  async intiateApp(newDb: string, oldDataBase?: string) {
+    this.todos = [];
     try {
-      await this.appConfigService.setConnection('dhis_touch');
-      this.getUpdateTodos();
+      await this.appConfigService.setConnection(newDb, oldDataBase);
+      this.count++;
+      setTimeout(() => {
+        this.getUpdateTodos();
+      }, 200);
     } catch (error) {
       console.log(JSON.stringify({ type: 'Connection error : ', error }));
+      this.getUpdateTodos();
     }
+  }
+
+  changeDb() {
+    this.intiateApp(`dhis_touch_${this.count}`, 'dhis_touch');
   }
 
   onSaveTodo(data) {
@@ -46,13 +57,15 @@ export class HomePage implements OnInit {
     }
   }
 
-  onSetCurrentTodo(response) {
-    const { todo } = response;
-    this.isFormLoaded = false;
-    this.currentTodo = todo;
-    setTimeout(() => {
+  async onSetCurrentTodo(response) {
+    try {
+      const { todo } = response;
+      this.isFormLoaded = false;
+      this.currentTodo = await this.todoService.getTodoById(todo.id);
       this.isFormLoaded = true;
-    }, 5);
+    } catch (error) {
+      console.log(JSON.stringify({ type: 'Connection error : ', error }));
+    }
   }
 
   async getUpdateTodos() {

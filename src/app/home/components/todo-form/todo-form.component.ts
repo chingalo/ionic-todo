@@ -25,8 +25,8 @@ export class TodoFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.currentTodo) {
-      const { id, name, description } = this.currentTodo;
-      this.todo = { ...this.todo, id, name, description };
+      const { id, name, description, isActive } = this.currentTodo;
+      this.todo = { ...this.todo, id, name, description, isActive };
     }
   }
 

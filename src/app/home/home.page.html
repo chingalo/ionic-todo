@@ -6,6 +6,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
+  <ion-button color="primary" (click)="changeDb()">DB</ion-button>
   <div *ngIf="isFormLoaded">
     <app-todo-form [currentTodo]="currentTodo" (saveTodoEvent)="onSaveTodo($event)"></app-todo-form>
   </div>

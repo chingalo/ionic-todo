@@ -22,6 +22,6 @@ export class TodoService {
   async getTodoById(id: string) {
     const todoRepository = getRepository('todo') as Repository<Todo>;
     const todo = todoRepository.findOne(id);
-    console.log(todo);
+    return todo;
   }
 }
