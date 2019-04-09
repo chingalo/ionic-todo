@@ -12,13 +12,19 @@ export class HomePage implements OnInit {
   name: string;
   description: string;
 
+  currentTodo: Todo;
+  isFormLoaded: boolean;
+
   todos: Array<Todo>;
 
   constructor(
     private appConfigService: AppConfigService,
     private todoService: TodoService
-  ) {}
+  ) {
+    this.isFormLoaded = true;
+  }
   ngOnInit() {
+    this.currentTodo = null;
     this.todos = [];
     this.intiateApp();
   }
@@ -35,8 +41,18 @@ export class HomePage implements OnInit {
   onSaveTodo(data) {
     const { status } = data;
     if (status) {
+      this.currentTodo = null;
       this.getUpdateTodos();
     }
+  }
+
+  onSetCurrentTodo(response) {
+    const { todo } = response;
+    this.isFormLoaded = false;
+    this.currentTodo = todo;
+    setTimeout(() => {
+      this.isFormLoaded = true;
+    }, 5);
   }
 
   async getUpdateTodos() {

@@ -1,6 +1,8 @@
-<ion-virtual-scroll [items]="todos">
-  <ion-item *virtualItem="let todo">
-    {{ todo.id }} {{ todo.name }}<br>
-    {{ todo.description }}
-  </ion-item>
-</ion-virtual-scroll>
+<div *ngIf="todos && todos.length > 0">
+  <div *ngFor="let todo of todos;">
+    <div class="todo-list-container" padding (click)="setCurrentTodo(todo)">
+      {{ todo.id }} {{ todo.name }}<br>
+      {{ todo.description }}
+    </div>
+  </div>
+</div>

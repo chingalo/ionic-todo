@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from 'src/models/todo';
 
 @Component({
@@ -9,9 +9,19 @@ import { Todo } from 'src/models/todo';
 export class TodoListComponent implements OnInit {
   @Input() todos: Array<Todo>;
 
+  @Output() currentTodo = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {
     this.todos = this.todos || [];
+  }
+
+  setCurrentTodo(todo: Todo) {
+    this.currentTodo.emit({ todo });
+  }
+
+  trackByFn(index, item) {
+    return item && item.id ? item.id : index;
   }
 }

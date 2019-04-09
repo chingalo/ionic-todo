@@ -14,7 +14,7 @@ export class TodoService {
     return todos;
   }
 
-  async addTodo(todo: Todo) {
+  async saveTodo(todo: Todo) {
     const todoRepository = getRepository('todo') as Repository<Todo>;
     await todoRepository.save([todo]);
   }
